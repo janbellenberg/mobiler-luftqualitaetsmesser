@@ -8,8 +8,9 @@ void loop() {
 }
 
 double getPWM() {
-  double h = pulseIn(7, HIGH, 1500000) / 1000.0;
-  double cppm = 2000.0 * (h - 2.0) / 1000.0;
+  double h = pulseIn(7, HIGH, 2500000) / 1000.0;
+  //double cppm = 2000.0 * (h - 2.0) / 1000.0;
+  double cppm = h / 1004.0 * 5000;
   Serial.println(h);
   Serial.println(cppm);
   Serial.println("");
