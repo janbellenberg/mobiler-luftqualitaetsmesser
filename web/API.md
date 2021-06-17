@@ -1,0 +1,26 @@
+# API
+
+GET /data?date=yyyy-MM-dd
+
+```json
+[
+  {
+    "temperature": 20.5,
+    "humidity": 50,
+    "co2": 240,
+    "timestamp": "09:38"
+  },
+  {
+    "temperature": 19.3,
+    "humidity": 43,
+    "co2": 350,
+    "timestamp": "09:50"
+  },
+  {
+    "temperature": 21.7,
+    "humidity": 48,
+    "co2": 315,
+    "timestamp": "10:01"
+  }
+]
+```
