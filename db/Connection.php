@@ -37,7 +37,7 @@ class Connection{
             case 'con':
                 return $this->con;
             default:
-                    echo "<br/> Failed occurred switch __get($name) <br/>";
+                echo "<br/> Failed occurred switch __get($name) <br/>";
                 break;
         }
     }
@@ -47,6 +47,9 @@ class Connection{
         switch ($name) {
             case 'con':
                 $this->con = $value;
+                break;
+            default:
+                echo "<br/> Failed occurred switch __set($name, $value) <br/>";
                 break;
         }
         return $value;
