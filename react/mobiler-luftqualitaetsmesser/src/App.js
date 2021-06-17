@@ -1,78 +1,59 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import LineChart from "./LineChart";
 import SearchBar from "./SearchBar";
 import './index.css';
 
 const App = () => {
   
-  const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
-  const [tLabels, setTLabels] = useState([]);
   const [temperature, setTemperature] = useState([]);
   const [humidity, setHumidity] = useState([]);
-  const [hLabels, setHLabels] = useState([]);
   const [co2, setCo2] = useState([]);
-  const [cLabels, setCLabels] = useState([]);
+  const [labels, setLabels] = useState([]);
 
-  const updateData = useCallback(async () => {
-    let tmp = await fetch("http://localhost/data.json?date=" + date );
+  const updateData = async (date, position) => {
+    let tmp = await fetch("http://localhost/data.json?date=" + date + "&position=" + position );
     tmp = await tmp.json();
     let t = [];
-    let tL = [];
     let h = [];
-    let hL = [];
     let c = [];
-    let cL = [];
+    let l = [];
 
-    tmp.temperature.forEach((item) => {
-      t.push(item.value);
-      tL.push(item.timestamp);
-    });
-
-    tmp.humidity.forEach((item) => {
-      h.push(item.value);
-      hL.push(item.timestamp);
-    });
-
-    tmp.co2.forEach((item) => {
-      c.push(item.value);
-      cL.push(item.timestamp);
+    tmp.forEach((item) => {
+      t.push(item.temperature);
+      h.push(item.humidity);
+      c.push(item.co2);
+      l.push(item.timestamp);
     });
 
     setTemperature(t);
-    setTLabels(tL);
     setHumidity(h);
-    setHLabels(hL);
     setCo2(c);
-    setCLabels(cL);
-  }, [date]);
-
-  useEffect(() => {
-    updateData();
-  }, [updateData, date]);
+    setLabels(l);
+  };
 
   return (
     <div className="App">
       Mobiler Luftqualitätsmesser<br/>
       
-      <SearchBar />
+      <SearchBar onSearch={updateData} />
       <br/>
 
       <LineChart 
         title="Temperatur"
         data={temperature}
-        labels={tLabels}
+        labels={labels}
         color="#ff8c00" />
 
       <LineChart 
         title="Luftfeuchte"
         data={humidity}
-        labels={hLabels}
+        labels={labels}
         color="#156ea6" />
 
       <LineChart 
         title="CO2"
         data={co2}
-        labels={cLabels}
+        labels={labels}
         color="#e800e8" />
     </div>
   );
