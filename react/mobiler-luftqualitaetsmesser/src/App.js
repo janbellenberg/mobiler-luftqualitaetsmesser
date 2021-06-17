@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import LineChart from "./LineChart";
+import SearchBar from "./SearchBar";
 import './index.css';
 
 const App = () => {
@@ -52,12 +53,8 @@ const App = () => {
   return (
     <div className="App">
       Mobiler Luftqualitätsmesser<br/>
-      <label htmlFor="date">Datum:</label>
-      <input 
-        id="date"
-        type="date"
-        value={date}
-        onChange={e => setDate(e.target.value)} />
+      
+      <SearchBar />
       <br/>
 
       <LineChart 
