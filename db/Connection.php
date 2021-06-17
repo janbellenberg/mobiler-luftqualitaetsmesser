@@ -12,8 +12,9 @@ class connection{
     function __construct()
     {
         $this->servername = "";
-        $this->dbname = "";
+        $this->dbname = "messstation";
         $this->dbusername = "";
+        $this->dbpassword = "";
         $this->dsn = "mysql:host=$this->servername;dbname=$this->dbname";
         $this->setConnection();
     }

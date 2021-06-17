@@ -23,7 +23,7 @@ CREATE TABLE Arten_Messungen{
 
 CREATE TABLE Messung{
     Messung_ID INT PRIMARY KEY AUTO_INCREMENT,
-    Zeitpunkt SMALLDATETIME,
+    Zeitpunkt DATETIME,
     Messung_WERT varchar(100) NOT NULL UNIQUE,
     Ge_Nr INT,
     Ra_Nr INT,
