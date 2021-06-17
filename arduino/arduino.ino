@@ -33,7 +33,7 @@ void loop() {
     return;
   }
   
-  int ppm, temperature = 0;
+  int ppm = 0, temperature = 0;
   readSensor(&ppm, &temperature);
   
   if (ppm < 1000 && (40 > hudty && hudty < 60 ) && temp < 26) // gute Luft
@@ -42,19 +42,24 @@ void loop() {
     digitalWrite(LEDyellow, LOW);
     digitalWrite(LEDred, LOW);
   }
-  else if ((ppm < 1000 && (hudty < 40 || hudty > 60) && temp < 26) || (ppm < 1000 && (40 > hudty && hudty < 60 ) && temp > 25) || ((ppm > 1000 && ppm < 1500) && (40 > hudty && hudty < 60 ) && temp < 26))
+  else if ((ppm < 1000 && (hudty < 40 || hudty > 60) && temp < 26) || 
+  (ppm < 1000 && (40 > hudty && hudty < 60 ) && temp > 25) || 
+  ((ppm > 1000 && ppm < 1500) && (40 > hudty && hudty < 60 ) && temp < 26))
   {
     digitalWrite(LEDgreen, HIGH);
     digitalWrite(LEDyellow, HIGH);
     digitalWrite(LEDred, LOW);
   }
-  else if ((ppm < 1000 && (hudty < 40 || hudty > 60) && temp > 25) || ((ppm > 1000 && ppm < 1500) && (hudty < 40 || hudty > 60) && temp < 26) || ((ppm > 1000 && ppm < 1500) && (40 > hudty && hudty < 60 ) && temp > 25))
+  else if ((ppm < 1000 && (hudty < 40 || hudty > 60) && temp > 25) || 
+  ((ppm > 1000 && ppm < 1500) && (hudty < 40 || hudty > 60) && temp < 26) || 
+  ((ppm > 1000 && ppm < 1500) && (40 > hudty && hudty < 60 ) && temp > 25))
   {
     digitalWrite(LEDgreen, LOW);
     digitalWrite(LEDyellow, HIGH);
     digitalWrite(LEDred, LOW);
   }
-  else if (((ppm > 1500 && ppm < 2000) && (hudty < 40 || hudty > 60) && temp < 26)) || ((ppm > 1500 && ppm < 2000) && (40 > hudty && hudty < 60 ) && temp > 25)
+  else if (((ppm > 1500 && ppm < 2000) && (hudty < 40 || hudty > 60) && temp < 26)) 
+  || ((ppm > 1500 && ppm < 2000) && (40 > hudty && hudty < 60 ) && temp > 25)
   {
     digitalWrite(LEDgreen, LOW);
     digitalWrite(LEDyellow, HIGH);
@@ -101,7 +106,7 @@ void readSensor(int *ppm, int *temperature)
   // zurückgibt.
   
   memset(response, 0, 9);
-  while (co2Serial.available() == 0)
+  while (!co2Serial.available())
   {
     delay(1000);
   }
