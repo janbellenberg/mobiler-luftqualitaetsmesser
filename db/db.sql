@@ -24,7 +24,7 @@ CREATE TABLE Arten_Messungen(
 
 CREATE TABLE Messung(
     Messung_ID INT PRIMARY KEY AUTO_INCREMENT,
-    Zeitpunkt DATETIME,
+    Zeitpunkt DATETIME DEFAULT CURRENT_TIMESTAMP(),
     Messung_WERT varchar(100) NOT NULL UNIQUE,
     Ge_Nr INT,
     Ra_Nr INT,
