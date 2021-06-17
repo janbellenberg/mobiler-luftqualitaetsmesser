@@ -28,8 +28,8 @@
 
                     
                     $response[0] = array(
-                        'temperature' => $temperature,
-                        'temperature_timestamp' => $temperature_timestamp
+                        'value' => $temperature,
+                        'timestamp' => $temperature_timestamp
                     );
 
                 }
@@ -39,8 +39,8 @@
                     $humidity_timestamp = $row["timestamp"];
 
                     $response[1] = array(
-                        'temperature' => $humidity,
-                        'temperature_timestamp' => $humidity_timestamp
+                        'value' => $humidity,
+                        'timestamp' => $humidity_timestamp
                     );
                 }
 
@@ -49,8 +49,8 @@
                     $co2_timestamp = $row["timestamp"];
 
                     $response[2] = array(
-                        'temperature' => $co2,
-                        'temperature_timestamp' => $co2_timestamp
+                        'value' => $co2,
+                        'timestamp' => $co2_timestamp
                     );
                 }
 
