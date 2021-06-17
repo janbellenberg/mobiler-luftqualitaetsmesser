@@ -2,15 +2,11 @@
     if (isset($_GET["data"])) {
         $data = $_GET["data"];
         require_once 'Connection.php';
-        $db = new connection();
+        $db = new Connection();
         $con = $this->__get("con");
 
-        $temperature; 
-        $temperature_timestamp;
-        $humidity;
-        $humidity_timestamp;
-        $co2;
-        $co2_timestamp;
+        // TO return JSON from PHP
+        $response = array();
     
     
         if ($con != null) {
@@ -29,16 +25,38 @@
                 foreach ($con->query($statment_1) as $row) {
                     $temperature = $row["Messung_Wert"];
                     $temperature_timestamp = $row["timestamp"];
+
+                    
+                    $response[0] = array(
+                        'temperature' => $temperature,
+                        'temperature_timestamp' => $temperature_timestamp
+                    );
+
                 }
 
                 foreach ($con->query($statment_2) as $row) {
                     $humidity = $row["Messung_Wert"];
                     $humidity_timestamp = $row["timestamp"];
+
+                    $response[1] = array(
+                        'temperature' => $humidity,
+                        'temperature_timestamp' => $humidity_timestamp
+                    );
                 }
 
                 foreach ($con->query($statment_3) as $row) {
                     $co2 = $row["Messung_Wert"];
                     $co2_timestamp = $row["timestamp"];
+
+                    $response[2] = array(
+                        'temperature' => $co2,
+                        'temperature_timestamp' => $co2_timestamp
+                    );
+                }
+
+                echo json_encode($response);
+                if ($json === false) {
+                    http_response_code(500);
                 }
     
             } catch (PDOException $e) {
@@ -46,13 +64,10 @@
                 $con = null;
             }
         }
-
     }
-
 /*
     Messung.Art_ID = 1 // temperature
     Messung.Art_ID = 2 // humidity
     Messung.Art_ID = 3 // co2
 */
-
 ?>
