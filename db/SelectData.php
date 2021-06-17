@@ -1,6 +1,6 @@
 <?php
-    if (isset($_GET["data"])) {
-        $data = $_GET["data"];
+    if (isset($_GET["date"])) {
+        $data = $_GET["date"];
         require_once 'Connection.php';
         $db = new Connection();
         $con = $this->__get("con");
