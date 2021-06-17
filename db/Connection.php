@@ -1,6 +1,6 @@
 <?php
 
-class connection{
+class Connection{
     private $servername;
     private $dbname; 
     private $dbusername;
