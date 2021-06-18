@@ -1,9 +1,12 @@
 <?php
-    if (isset($_GET["date"])) {
+    require_once 'Connection.php';
+    $db = new Connection();
+
+    if (isset($_GET["date"]) && isset($_GET["position"])) {
         $data = $_GET["date"];
-        require_once 'Connection.php';
-        $db = new Connection();
-        $con = $this->__get("con");
+        $position = $_GET["position"];
+        //Connection DB
+        $con = $db->__get("con");
 
         // TO return JSON from PHP
         $response = array();
@@ -11,50 +14,33 @@
     
         if ($con != null) {
             try {
-                $statment_1 = "SELECT Messung_Wert, DATE_FORMAT(Zeitpunkt, '%HH:%mm') AS 'timestamp' FROM Messung WHERE
-                                Messung.Art_ID = 1 AND
-                                Date(Zeitpunkt) = $data ";
-                $statment_2 = "SELECT Messung_Wert, DATE_FORMAT(Zeitpunkt, '%HH:%mm') AS 'timestamp' FROM Messung WHERE
-                               Messung.Art_ID = 2 AND
-                               Date(Zeitpunkt) = $data ";
-                $statment_3 = "SELECT Messung_Wert, DATE_FORMAT(Zeitpunkt, '%HH:%mm') AS 'timestamp' FROM Messung WHERE
-                               Art_ID = 3 AND
-                               Date(Zeitpunkt) = $data ";    
+                $sql = "SELECT co2_Wert, temperatur_Wert, feuchtigkeit_Wert,
+                        Pos_Nr, DATE_FORMAT(cTimestamp, '%H:%i') AS 'time' FROM Messung 
+                        WHERE
+                        DATE_FORMAT(cTimestamp,'%Y-%m-%d') = '$data' 
+                        AND
+                        Pos_Nr = $position ;"; 
+    
+                $result = $con->query($sql)->fetchAll();
 
+                foreach ($result as $row) {
 
-                foreach ($con->query($statment_1) as $row) {
-                    $temperature = $row["Messung_Wert"];
-                    $temperature_timestamp = $row["timestamp"];
-
+                    $co2_Wert = $row["co2_Wert"];
+                    $temperatur_Wert = $row["temperatur_Wert"];
+                    $feuchtigkeit_Wert = $row["feuchtigkeit_Wert"];
+                    $time = $row["time"];
                     
-                    $response[0] = array(
-                        'value' => $temperature,
-                        'timestamp' => $temperature_timestamp
+                    $response = array(
+                        'co2' => $co2_Wert,
+                        'temperature' => $temperatur_Wert,
+                        'humidity' => $feuchtigkeit_Wert,
+                        'timestamp' => $time
                     );
 
                 }
-
-                foreach ($con->query($statment_2) as $row) {
-                    $humidity = $row["Messung_Wert"];
-                    $humidity_timestamp = $row["timestamp"];
-
-                    $response[1] = array(
-                        'value' => $humidity,
-                        'timestamp' => $humidity_timestamp
-                    );
-                }
-
-                foreach ($con->query($statment_3) as $row) {
-                    $co2 = $row["Messung_Wert"];
-                    $co2_timestamp = $row["timestamp"];
-
-                    $response[2] = array(
-                        'value' => $co2,
-                        'timestamp' => $co2_timestamp
-                    );
-                }
-
-                echo json_encode($response);
+                
+                $json =  json_encode($response);
+                echo $json;
                 if ($json === false) {
                     http_response_code(500);
                 }
@@ -65,9 +51,14 @@
             }
         }
     }
-/*
-    Messung.Art_ID = 1 // temperature
-    Messung.Art_ID = 2 // humidity
-    Messung.Art_ID = 3 // co2
-*/
+
+    if (isset($_GET["building"])) {
+        //Connection DB
+        $con = $this->__get("con");
+    }
+    if (isset($_GET["room"])) {
+        $room = 
+        //Connection DB
+        $con = $this->__get("con");
+    }
 ?>
