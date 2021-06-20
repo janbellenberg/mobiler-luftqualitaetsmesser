@@ -6,6 +6,7 @@
         $data = $_GET["date"];
         $position = $_GET["position"];
         //Connection DB
+        $db = new Connection();
         $con = $db->__get("con");
 
         // TO return JSON from PHP
@@ -43,10 +44,10 @@
                
                 if ($response != null) {
                     $json =  json_encode($response);
-                    echo $json;
                     if ($json === false) {
                         http_response_code(500);
-                    }
+                    }else echo $json;
+
                 }
 
     
@@ -60,15 +61,79 @@
     if (isset($_GET["building"])) {
         $building = $_GET["building"];
         //Connection DB
-        $con = $this->__get("con");
+        $con = $db->__get("con");
+
+        $response = null;
+
+        if ($con != null) {
+            try {
+                $sql = "SELECT Gebaeude_Name FROM gebaeude WHERE Ge_Nr = $building ;";
+
+                $result = $con->query($sql)->fetchAll();
+
+                if ($result != null) {
+                    foreach ($result as $row) {
+                        $Gebaeude_Name = $row["Gebaeude_Name"];
+
+                        $response = array(
+                            "building" => $Gebaeude_Name
+                        );
+                    }
+                }
+
+                if ($response != null) {
+                    $json = json_encode($response);
+                    if ($json === false) {
+                        http_response_code(500);
+                    }else echo $json;
+                }
+
+
+            } catch (PDOException $e) {
+                echo "Connection Failed: " . $e->getMessage();
+                $con = null;
+            }
+        }
+
 
 
     }
     if (isset($_GET["room"])) {
         $room = $_GET["room"];
         //Connection DB
-        $con = $this->__get("con");
+        $con = $db->__get("con");
 
+        $response = null;
+
+        if ($con != null) {
+            try {
+                $sql = "SELECT Raum_Name FROM raum WHERE Ra_Nr = $room;";
+                
+                $result = $con->query($sql)->fetchAll();
+                
+                if ($result != null) {
+                    foreach ($result as $row) {
+                        $room = $row["Raum_Name"];
+
+                        $response = array(
+                            "room" => $room
+                        );
+                    }
+                }
+
+
+                if ($response != null) {
+                    $json = json_encode($response);
+                    if ($json === false) {
+                        http_response_code(500);
+                    }else echo $json;
+                }
+                
+            } catch (PDOException $e) {
+                echo "Connection Failed: " . $e->getMessage();
+                $con = null;
+            }
+        }
 
     }
 ?>
