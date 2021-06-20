@@ -9,7 +9,7 @@
         $con = $db->__get("con");
 
         // TO return JSON from PHP
-        $response = array();
+        $response = null;
     
     
         if ($con != null) {
@@ -23,27 +23,32 @@
     
                 $result = $con->query($sql)->fetchAll();
 
-                foreach ($result as $row) {
+                if ($result != null) {
+                    foreach ($result as $row) {
 
-                    $co2_Wert = $row["co2_Wert"];
-                    $temperatur_Wert = $row["temperatur_Wert"];
-                    $feuchtigkeit_Wert = $row["feuchtigkeit_Wert"];
-                    $time = $row["time"];
-                    
-                    $response = array(
-                        'co2' => $co2_Wert,
-                        'temperature' => $temperatur_Wert,
-                        'humidity' => $feuchtigkeit_Wert,
-                        'timestamp' => $time
-                    );
+                        $co2_Wert = $row["co2_Wert"];
+                        $temperatur_Wert = $row["temperatur_Wert"];
+                        $feuchtigkeit_Wert = $row["feuchtigkeit_Wert"];
+                        $time = $row["time"];
+                        
+                        $response = array(
+                            'co2' => $co2_Wert,
+                            'temperature' => $temperatur_Wert,
+                            'humidity' => $feuchtigkeit_Wert,
+                            'timestamp' => $time
+                        );
+    
+                    }  
+                }
+               
+                if ($response != null) {
+                    $json =  json_encode($response);
+                    echo $json;
+                    if ($json === false) {
+                        http_response_code(500);
+                    }
+                }
 
-                }
-                
-                $json =  json_encode($response);
-                echo $json;
-                if ($json === false) {
-                    http_response_code(500);
-                }
     
             } catch (PDOException $e) {
                 echo "Connection Failed: " . $e->getMessage();
@@ -53,12 +58,17 @@
     }
 
     if (isset($_GET["building"])) {
+        $building = $_GET["building"];
         //Connection DB
         $con = $this->__get("con");
+
+
     }
     if (isset($_GET["room"])) {
-        $room = 
+        $room = $_GET["room"];
         //Connection DB
         $con = $this->__get("con");
+
+
     }
 ?>
