@@ -1,3 +1,16 @@
+:root {
+  --accent: #659DBD;
+}
+
+body {
+  margin: 0;
+}
+
+* {
+  font-family: Raleway, sans-serif;
+  box-sizing: border-box;
+}
+
 canvas {
   display: inline !important;
 }

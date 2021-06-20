@@ -1,6 +1,7 @@
 import { useState } from "react";
 import LineChart from "./LineChart";
 import SearchBar from "./SearchBar";
+import Header from "./components/Header/";
 import './index.css';
 
 const App = () => {
@@ -33,7 +34,7 @@ const App = () => {
 
   return (
     <div className="App">
-      Mobiler Luftqualitätsmesser<br/>
+      <Header onLoadData={undefined} onDiag={undefined} />
       
       <SearchBar onSearch={updateData} />
       <br/>
