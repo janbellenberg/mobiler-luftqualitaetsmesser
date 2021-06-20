@@ -1,7 +1,7 @@
 import { useState } from "react";
-import LineChart from "./LineChart";
 import SearchBar from "./SearchBar";
 import Header from "./components/Header/";
+import DiagramElement from "./components/GridElement/DiagramElement";
 import './index.css';
 
 const App = () => {
@@ -39,23 +39,28 @@ const App = () => {
       <SearchBar onSearch={updateData} />
       <br/>
 
-      <LineChart 
-        title="Temperatur"
-        data={temperature}
-        labels={labels}
-        color="#ff8c00" />
+      <main>
+        <DiagramElement 
+          title="Temperatur in °C"
+          data={temperature}
+          labels={labels}
+          min={0}
+          max={40} />
 
-      <LineChart 
-        title="Luftfeuchte"
-        data={humidity}
-        labels={labels}
-        color="#156ea6" />
+        <DiagramElement 
+          title="Luftfeuchte in %"
+          data={humidity}
+          labels={labels}
+          min={0}
+          max={100} />
 
-      <LineChart 
-        title="CO2"
-        data={co2}
-        labels={labels}
-        color="#e800e8" />
+        <DiagramElement 
+          title="CO&#8322; in ppm"
+          data={co2}
+          labels={labels}
+          min={0}
+          max={5000} />
+      </main>
     </div>
   );
 }
