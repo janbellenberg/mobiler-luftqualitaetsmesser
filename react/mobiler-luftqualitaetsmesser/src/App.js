@@ -2,6 +2,7 @@ import { useState } from "react";
 import SearchBar from "./SearchBar";
 import Header from "./components/Header/";
 import DiagramElement from "./components/GridElement/DiagramElement";
+import ActionElement from "./components/GridElement/ActionElement";
 import './index.css';
 
 const App = () => {
@@ -40,6 +41,7 @@ const App = () => {
       <br/>
 
       <main>
+        <ActionElement onExport={undefined}  onRefresh={undefined} />
         <DiagramElement 
           title="Temperatur in °C"
           data={temperature}
