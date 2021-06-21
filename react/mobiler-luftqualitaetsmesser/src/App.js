@@ -1,8 +1,9 @@
 import { useState } from "react";
-import SearchBar from "./SearchBar";
+//import SearchBar from "./SearchBar";
 import Header from "./components/Header/";
 import DiagramElement from "./components/GridElement/DiagramElement";
 import ActionElement from "./components/GridElement/ActionElement";
+import InfoElement from "./components/GridElement/InfoElement";
 import './index.css';
 
 const App = () => {
@@ -37,11 +38,14 @@ const App = () => {
     <div className="App">
       <Header onLoadData={undefined} onDiag={undefined} />
       
-      <SearchBar onSearch={updateData} />
+      {/*<SearchBar onSearch={updateData} />*/}
       <br/>
 
       <main>
-        <ActionElement onExport={undefined}  onRefresh={undefined} />
+        <div>
+          <InfoElement location={"Dahnstraße"} room={"221"} position={"5"} temperature={20} humidity={30} co2={650} />
+          <ActionElement onExport={undefined}  onRefresh={undefined} />
+        </div>
         <DiagramElement 
           title="Temperatur in °C"
           data={temperature}
