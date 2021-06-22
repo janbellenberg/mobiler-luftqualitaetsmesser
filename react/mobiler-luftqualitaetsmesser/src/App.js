@@ -4,6 +4,7 @@ import Header from "./components/Header/";
 import DiagramElement from "./components/GridElement/DiagramElement";
 import ActionElement from "./components/GridElement/ActionElement";
 import InfoElement from "./components/GridElement/InfoElement";
+import DiagDialog from "./components/Dialog/DiagDialog";
 import './index.css';
 
 const App = () => {
@@ -12,6 +13,8 @@ const App = () => {
   const [humidity, setHumidity] = useState([]);
   const [co2, setCo2] = useState([]);
   const [labels, setLabels] = useState([]);
+
+  const [showDiagDialog, setShowDiagDialog] = useState(false);
 
   const updateData = async (date, position) => {
     let tmp = await fetch("http://localhost/data.json?date=" + date + "&position=" + position );
@@ -36,7 +39,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <Header onLoadData={undefined} onDiag={undefined} />
+      <Header onLoadData={undefined} onDiag={() => setShowDiagDialog(true)} />
       
       {/*<SearchBar onSearch={updateData} />*/}
       <br/>
@@ -67,6 +70,12 @@ const App = () => {
           min={0}
           max={5000} />
       </main>
+
+      { showDiagDialog
+        ? <DiagDialog onHide={() => setShowDiagDialog(false)} />
+        : null
+      }
+      
     </div>
   );
 }
