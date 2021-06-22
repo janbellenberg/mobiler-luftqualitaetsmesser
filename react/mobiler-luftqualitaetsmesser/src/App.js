@@ -1,10 +1,10 @@
 import { useState } from "react";
-//import SearchBar from "./SearchBar";
 import Header from "./components/Header/";
 import DiagramElement from "./components/GridElement/DiagramElement";
 import ActionElement from "./components/GridElement/ActionElement";
 import InfoElement from "./components/GridElement/InfoElement";
 import DiagDialog from "./components/Dialog/DiagDialog";
+import FilterDialog from "./components/Dialog/FilterDialog";
 import './index.css';
 
 const App = () => {
@@ -14,7 +14,13 @@ const App = () => {
   const [co2, setCo2] = useState([]);
   const [labels, setLabels] = useState([]);
 
+  const [selectedLocation, setSelectedLocation] = useState();
+  const [selectedRoom, setSelectedRoom] = useState();
+  const [selectedPosition, setSelectedPosition] = useState();
+  const [lastFilter, setLastFilter] = useState();
+
   const [showDiagDialog, setShowDiagDialog] = useState(false);
+  const [showFilterDialog, setShowFilterDialog] = useState(true);
 
   const updateData = async (date, position) => {
     let tmp = await fetch("http://localhost/data.json?date=" + date + "&position=" + position );
@@ -39,16 +45,30 @@ const App = () => {
 
   return (
     <div className="App">
-      <Header onLoadData={undefined} onDiag={() => setShowDiagDialog(true)} />
-      
-      {/*<SearchBar onSearch={updateData} />*/}
+      <Header
+        onLoadData={() => setShowFilterDialog(true)}
+        onDiag={() => setShowDiagDialog(true)} />
       <br/>
 
       <main>
         <div>
-          <InfoElement location={"Dahnstraße"} room={"221"} position={"5"} temperature={20} humidity={30} co2={650} />
-          <ActionElement onExport={undefined}  onRefresh={undefined} />
+          <InfoElement
+            location={selectedLocation || "Standort nicht ausgewählt"}
+            room={selectedRoom || "nicht ausgewählt"}
+            position={selectedPosition || " -"}
+            temperature={20}
+            humidity={30}
+            co2={650} />
+          
+          <ActionElement onExport={undefined}  onRefresh={() => {
+            if(lastFilter === undefined) {
+              setShowFilterDialog(true);
+            } else {
+              updateData(lastFilter.date, lastFilter.position);
+            }
+          }} />
         </div>
+
         <DiagramElement 
           title="Temperatur in °C"
           data={temperature}
@@ -75,7 +95,20 @@ const App = () => {
         ? <DiagDialog onHide={() => setShowDiagDialog(false)} />
         : null
       }
-      
+
+      { showFilterDialog
+        ? <FilterDialog
+            onFilter={(data) => {
+              setSelectedLocation(data.location);
+              setSelectedRoom(data.room);
+              setSelectedPosition(data.position);
+              updateData(data.date, data.position);
+              setShowFilterDialog(false);
+              setLastFilter({date: data.date, position: data.position});
+            }}
+            onHide={() => setShowFilterDialog(false)} />
+        : null
+      }
     </div>
   );
 }

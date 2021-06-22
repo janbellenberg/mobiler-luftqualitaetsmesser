@@ -42,6 +42,13 @@ dialog div.dialog-buttons input[type=button] {
   cursor: pointer;
 }
 
+dialog label {
+  display: inline-block;
+  font-weight: bold;
+  text-align: right;
+  width: 7em;
+}
+
 dialog div.dialog-buttons input[type=button]:first-of-type {
   background: white;
   color: var(--accent);
@@ -83,4 +90,14 @@ div#diag-dialog-wrapper dialog div.dialog-buttons {
 span#baud-rate-wrapper {
   display: block;
   margin: 1em;
+}
+
+#filter-dialog select,
+#filter-dialog input[type=date] {
+  margin: 10px 0 10px 20px;
+  width: 12em;
+}
+
+#filter-dialog select#location {
+  width: 31.5em;
 }
