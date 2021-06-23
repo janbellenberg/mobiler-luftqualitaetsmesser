@@ -26,7 +26,7 @@ const InfoElement = ({location, room, position, temperature, humidity, co2}) => 
           </div>
           <div className="info-item">
             <img src={CO2Icon} alt="CO2-Gehalt" />
-            {co2 || "- "}ppm
+            {co2 || "-"} ppm
           </div>
           
         </div>
