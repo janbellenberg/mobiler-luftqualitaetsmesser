@@ -1,7 +1,7 @@
 import './StatusIndicator.css';
 
-const status = ["good", "attention", "bad"];
-const icons = ["✔", "●", "✖"]
+const status = [undefined, "good", "attention", "bad"];
+const icons = ["?", "✔", "●", "✖"]
 
 const StatusIndicator = ({temperature, humidity, co2}) => {
 

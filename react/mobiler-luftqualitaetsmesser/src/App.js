@@ -58,9 +58,9 @@ const App = () => {
             location={selectedLocation || "Standort nicht ausgewählt"}
             room={selectedRoom || "nicht ausgewählt"}
             position={selectedPosition || " -"}
-            temperature={20}
-            humidity={30}
-            co2={650} />
+            temperature={temperature[temperature.length - 1]}
+            humidity={humidity[humidity.length - 1]}
+            co2={co2[co2.length - 1]} />
           
           <ActionElement onExport={undefined} onInfo={() => setShowInfoDialog(true)}  onRefresh={() => {
             if(lastFilter === undefined) {

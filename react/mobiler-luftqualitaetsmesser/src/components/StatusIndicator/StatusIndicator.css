@@ -8,6 +8,15 @@
   color: white;
 }
 
+#status-indicator:not([status]) {
+  font-weight: bold;
+  font-size: 40pt;
+  padding-left: 30px;
+  padding-right: 0;
+  color: black;
+  background-color: lightgray;
+}
+
 #status-indicator[status=good] {
   background: #00C800;
 }
