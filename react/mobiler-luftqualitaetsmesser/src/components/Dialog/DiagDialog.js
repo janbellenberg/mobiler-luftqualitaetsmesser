@@ -44,8 +44,7 @@ const DiagDialog = ({onHide}) => {
 
     port.on('data', data => {
       let encodedString = String.fromCharCode.apply(null, data);
-      let decodedString = decodeURIComponent(escape(encodedString));
-      dispatch({type: 'append', payload: decodedString});
+      dispatch({type: 'append', payload: encodedString});
     });
   };
 
