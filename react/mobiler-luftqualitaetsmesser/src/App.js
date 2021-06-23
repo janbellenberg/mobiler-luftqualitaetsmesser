@@ -6,7 +6,6 @@ import InfoElement from "./components/GridElement/InfoElement";
 import DiagDialog from "./components/Dialog/DiagDialog";
 import FilterDialog from "./components/Dialog/FilterDialog";
 import InfoDialog from "./components/Dialog/InfoDialog";
-import './index.css';
 
 const App = () => {
   
@@ -22,10 +21,10 @@ const App = () => {
 
   const [showDiagDialog, setShowDiagDialog] = useState(false);
   const [showFilterDialog, setShowFilterDialog] = useState(true);
-  const [showInfoDialog, setShowInfoDialog] = useState(true);
+  const [showInfoDialog, setShowInfoDialog] = useState(false);
 
   const updateData = async (date, position) => {
-    let tmp = await fetch("http://localhost/data.json?date=" + date + "&position=" + position );
+    let tmp = await fetch("http://localhost/data.json?date=" + date + "&position=" + position);
     tmp = await tmp.json();
     let t = [];
     let h = [];
