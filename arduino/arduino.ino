@@ -36,7 +36,7 @@ void loop() {
   int ppm = 0, temperature = 0;
   readSensor(&ppm, &temperature);
   
-  if (ppm < 1000 && (40 > hudty && hudty < 60 ) && temp < 26) // gute Luft
+  if (ppm < 1000 && 40 < hudty && hudty < 60 && temp < 26) // gute Luft
   {
     digitalWrite(LEDgreen, HIGH);
     digitalWrite(LEDyellow, LOW);
