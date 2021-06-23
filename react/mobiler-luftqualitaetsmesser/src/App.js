@@ -5,6 +5,7 @@ import ActionElement from "./components/GridElement/ActionElement";
 import InfoElement from "./components/GridElement/InfoElement";
 import DiagDialog from "./components/Dialog/DiagDialog";
 import FilterDialog from "./components/Dialog/FilterDialog";
+import InfoDialog from "./components/Dialog/InfoDialog";
 import './index.css';
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
 
   const [showDiagDialog, setShowDiagDialog] = useState(false);
   const [showFilterDialog, setShowFilterDialog] = useState(true);
+  const [showInfoDialog, setShowInfoDialog] = useState(true);
 
   const updateData = async (date, position) => {
     let tmp = await fetch("http://localhost/data.json?date=" + date + "&position=" + position );
@@ -60,7 +62,7 @@ const App = () => {
             humidity={30}
             co2={650} />
           
-          <ActionElement onExport={undefined}  onRefresh={() => {
+          <ActionElement onExport={undefined} onInfo={() => setShowInfoDialog(true)}  onRefresh={() => {
             if(lastFilter === undefined) {
               setShowFilterDialog(true);
             } else {
@@ -107,6 +109,11 @@ const App = () => {
               setLastFilter({date: data.date, position: data.position});
             }}
             onHide={() => setShowFilterDialog(false)} />
+        : null
+      }
+
+      { showInfoDialog
+        ? <InfoDialog onHide={() => setShowInfoDialog(false)} />
         : null
       }
     </div>

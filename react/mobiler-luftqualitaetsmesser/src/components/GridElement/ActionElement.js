@@ -4,7 +4,7 @@ import ExportIcon from "../../icons/export.png";
 import RefreshIcon from "../../icons/refresh.png";
 import InfoIcon from '../../icons/info.png';
 
-const ActionElement = ({onExport, onRefresh}) => {
+const ActionElement = ({onExport, onRefresh, onInfo}) => {
   return (
     <GridElement>
       <div id="action-flex">
@@ -21,7 +21,7 @@ const ActionElement = ({onExport, onRefresh}) => {
         <IconButton
           text="Info"
           icon={InfoIcon}
-          onClick={onRefresh} />
+          onClick={onInfo} />
       </div>
     </GridElement>
   );

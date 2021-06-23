@@ -11,7 +11,7 @@ const Dialog = ({title, actionText, onActionClick, onAbortClick, children}) => {
         <div className="dialog-buttons">
           <input 
             type="button"
-            value="Abbrechen"
+            value="Schließen"
             onClick={onAbortClick} />
 
           <input 
