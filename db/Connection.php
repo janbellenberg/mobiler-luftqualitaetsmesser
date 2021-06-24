@@ -5,16 +5,16 @@ class Connection{
     private $dbname; 
     private $dbusername;
     private $dbpassword;
-    private $dns; // //Data Source Name
+    private $dsn; // //Data Source Name
     private $con;
 
 
     function __construct()
     {
-        $this->servername = "";
+        $this->servername = "localhost";
         $this->dbname = "messstation";
-        $this->dbusername = "";
-        $this->dbpassword = "";
+        $this->dbusername = "username";
+        $this->dbpassword = "password";
         $this->dsn = "mysql:host=$this->servername;dbname=$this->dbname";
         $this->setConnection();
     }
@@ -23,7 +23,7 @@ class Connection{
     {
         $con = null;
         try{
-            $con = new PDO($this->dns, $this->dbusername, $this->dbpassword);
+            $con = new PDO($this->dsn, $this->dbusername, $this->dbpassword);
             $this->__set("con", $con);
         }catch(PDOException $e){
             echo "Connection Failed: " . $e->getMessage();
@@ -47,6 +47,9 @@ class Connection{
         switch ($name) {
             case 'con':
                 $this->con = $value;
+                break;
+            case 'dsn':
+               $this->con = $value;
                 break;
             default:
                 echo "<br/> Failed occurred switch __set($name, $value) <br/>";
