@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import './Dialog.css';
 
 const Dialog = ({title, actionText, onActionClick, onAbortClick, children}) => {
@@ -23,6 +24,14 @@ const Dialog = ({title, actionText, onActionClick, onAbortClick, children}) => {
       </dialog>
     </div>
   );
+};
+
+Dialog.propTypes = {
+  title: PropTypes.node.isRequired,
+  actionText: PropTypes.node.isRequired,
+  onActionClick: PropTypes.func.isRequired,
+  onAbortClick: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired
 };
 
 export default Dialog;

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import GridElement from ".";
 import IconButton from "../IconButton";
 import ExportIcon from "../../icons/export.png";
@@ -25,6 +26,12 @@ const ActionElement = ({onExport, onRefresh, onInfo}) => {
       </div>
     </GridElement>
   );
+};
+
+ActionElement.propTypes = {
+  onExport: PropTypes.func.isRequired,
+  onRefresh: PropTypes.func.isRequired,
+  onInfo: PropTypes.func.isRequired
 };
 
 export default ActionElement;

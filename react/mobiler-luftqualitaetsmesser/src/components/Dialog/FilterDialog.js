@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 import Dialog from ".";
 
 const FilterDialog = ({onFilter, onHide}) => {
@@ -119,5 +120,9 @@ const FilterDialog = ({onFilter, onHide}) => {
     </div>
   );
 }
+
+FilterDialog.propTypes = {
+  onHide: PropTypes.func.isRequired
+};
 
 export default FilterDialog;

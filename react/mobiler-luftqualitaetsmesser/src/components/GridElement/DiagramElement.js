@@ -1,9 +1,11 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
+import PropTypes from 'prop-types';
+
 import GridElement from '.';
 
 const DiagramElement = ({title, data, labels, min, max}) => {
-
+  
   return (
     <GridElement>
       <h2>{title}</h2>
@@ -38,7 +40,14 @@ const DiagramElement = ({title, data, labels, min, max}) => {
       />
     </GridElement>
   );
-
 }
+
+DiagramElement.propTypes = {
+  title: PropTypes.node.isRequired,
+  data: PropTypes.array.isRequired,
+  labels: PropTypes.array.isRequired,
+  min: PropTypes.number.isRequired,
+  max: PropTypes.number.isRequired
+};
 
 export default DiagramElement;

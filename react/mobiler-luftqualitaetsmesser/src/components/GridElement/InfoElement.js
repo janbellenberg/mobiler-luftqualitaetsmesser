@@ -1,5 +1,6 @@
 import GridElement from ".";
 import StatusIndicator from "../StatusIndicator";
+import PropTypes from 'prop-types';
 
 import TemperatureIcon from '../../icons/temperture.png';
 import HumidityIcon from '../../icons/humidity.png';
@@ -33,6 +34,15 @@ const InfoElement = ({location, room, position, temperature, humidity, co2}) => 
       </div>
     </GridElement>
   );
+};
+
+InfoElement.propTypes = {
+  location: PropTypes.node,
+  room: PropTypes.node,
+  position: PropTypes.node,
+  temperature: PropTypes.number,
+  humidity: PropTypes.number,
+  co2: PropTypes.number
 };
 
 export default InfoElement;

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import './IconButton.css';
 
 const IconButton = ({text, icon, onClick}) => {
@@ -7,6 +8,12 @@ const IconButton = ({text, icon, onClick}) => {
       {text}
     </span>
   );
+};
+
+IconButton.propTypes = {
+  text: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired
 };
 
 export default IconButton;

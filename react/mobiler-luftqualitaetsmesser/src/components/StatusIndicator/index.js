@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import './StatusIndicator.css';
 
 const status = [undefined, "good", "attention", "bad"];
@@ -22,6 +23,12 @@ const StatusIndicator = ({temperature, humidity, co2}) => {
       {icons[score]}
     </div>
   );
+};
+
+StatusIndicator.propTypes = {
+  temperature: PropTypes.number,
+  humidity: PropTypes.number,
+  co2: PropTypes.number
 };
 
 export default StatusIndicator;

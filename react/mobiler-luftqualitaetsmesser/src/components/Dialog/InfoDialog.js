@@ -1,4 +1,5 @@
 import Dialog from '.';
+import PropTypes from 'prop-types';
 
 const InfoDialog = ({onHide}) => {
   return (
@@ -34,6 +35,10 @@ const InfoDialog = ({onHide}) => {
       <p/>
     </Dialog>
   );
+};
+
+InfoDialog.propTypes = {
+  onHide: PropTypes.func.isRequired
 };
 
 export default InfoDialog;

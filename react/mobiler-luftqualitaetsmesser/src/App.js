@@ -61,7 +61,7 @@ const App = () => {
             humidity={humidity[humidity.length - 1]}
             co2={co2[co2.length - 1]} />
           
-          <ActionElement onExport={undefined} onInfo={() => setShowInfoDialog(true)}  onRefresh={() => {
+          <ActionElement onExport={() => {}} onInfo={() => setShowInfoDialog(true)}  onRefresh={() => {
             if(lastFilter === undefined) {
               setShowFilterDialog(true);
             } else {

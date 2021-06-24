@@ -1,4 +1,5 @@
 import { useState, useReducer, useEffect } from "react";
+import PropTypes from 'prop-types';
 import Dialog from ".";
 import SerialPort from '@serialport/stream';
 import WSABinding from 'serialport-binding-webserialapi';
@@ -105,6 +106,10 @@ const DiagDialog = ({onHide}) => {
       </Dialog>
     </div>
   );
+};
+
+DiagDialog.propTypes = {
+  onHide: PropTypes.func.isRequired
 };
 
 export default DiagDialog;

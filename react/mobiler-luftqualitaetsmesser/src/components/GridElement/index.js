@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import './GridElement.css';
 
 const GridElement = ({children}) => {
@@ -6,6 +7,10 @@ const GridElement = ({children}) => {
       {children}
     </section>
   );
+};
+
+GridElement.propTypes = {
+  children: PropTypes.node
 };
 
 export default GridElement;
