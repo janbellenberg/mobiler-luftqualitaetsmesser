@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
+import {SERVER} from '../../config';
 import Dialog from ".";
 
 const FilterDialog = ({onFilter, onHide}) => {
@@ -14,7 +15,7 @@ const FilterDialog = ({onFilter, onHide}) => {
   const [positionList, setPositions] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost/locations.json")
+    fetch("http://" + SERVER + "/SelectData.php?locations")
       .then(res => res.json())
       .then(json => {
         setLocation(json[0].id);
@@ -27,7 +28,7 @@ const FilterDialog = ({onFilter, onHide}) => {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost/rooms.json?location=" + location)
+    fetch("http://" + SERVER + "/SelectData.php?location_id=" + location)
       .then(res => res.json())
       .then(json => {
         setRooms(json);
@@ -38,7 +39,7 @@ const FilterDialog = ({onFilter, onHide}) => {
   }, [location]);
 
   useEffect(() => {
-    fetch("http://localhost/positions.json?room=" + room)
+    fetch("http://" + SERVER + "/SelectData.php?room_id=" + room)
       .then(res => res.json())
       .then(json => {
         setPositions(json);

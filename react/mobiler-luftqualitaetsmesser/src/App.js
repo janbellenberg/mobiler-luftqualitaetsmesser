@@ -6,6 +6,7 @@ import InfoElement from "./components/GridElement/InfoElement";
 import DiagDialog from "./components/Dialog/DiagDialog";
 import FilterDialog from "./components/Dialog/FilterDialog";
 import InfoDialog from "./components/Dialog/InfoDialog";
+import {SERVER} from './config';
 
 const App = () => {
   
@@ -24,7 +25,7 @@ const App = () => {
   const [showInfoDialog, setShowInfoDialog] = useState(false);
 
   const updateData = async (date, position) => {
-    let tmp = await fetch("http://localhost/data.json?date=" + date + "&position=" + position);
+    let tmp = await fetch("http://" + SERVER + "/SelectData.php?date=" + date + "&position=" + position);
     tmp = await tmp.json();
     let t = [];
     let h = [];
@@ -103,7 +104,7 @@ const App = () => {
           title="Temperatur in °C"
           data={temperature}
           labels={labels}
-          min={0}
+          min={-10}
           max={40} />
 
         <DiagramElement 
