@@ -44,6 +44,31 @@ const App = () => {
     setLabels(l);
   };
 
+  const exportCSV = () => {
+    let result = "data:text/csv;charset=utf-8,";
+    result += 'Zeit;Temperatur;Luftfeuchte;CO2-Gehalt\r\n';
+
+    for(let i = 0; i < labels.length; i++) {
+      result += labels[i];
+      result += ';';
+      result += temperature[i];
+      result += ';';
+      result += humidity[i];
+      result += ';';
+      result += co2[i];
+      result += '\r\n';
+    }
+
+    encodeURI(result);
+
+    var link = document.createElement("a");
+    link.setAttribute("href", encodeURI(result));
+    link.setAttribute("download", "export." + lastFilter.date + ".csv");
+    document.body.appendChild(link);
+
+    link.click();
+  }
+
   return (
     <div className="App">
       <Header
@@ -61,7 +86,11 @@ const App = () => {
             humidity={humidity[humidity.length - 1]}
             co2={co2[co2.length - 1]} />
           
-          <ActionElement onExport={() => {}} onInfo={() => setShowInfoDialog(true)}  onRefresh={() => {
+          <ActionElement onExport={() => {
+            if(lastFilter !== undefined) {
+              exportCSV();
+            }
+          }} onInfo={() => setShowInfoDialog(true)}  onRefresh={() => {
             if(lastFilter === undefined) {
               setShowFilterDialog(true);
             } else {
