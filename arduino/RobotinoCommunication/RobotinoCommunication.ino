@@ -1,30 +1,30 @@
-#include <avr/interrupt.h>
-
+byte dataPins[] = {D4, D5, D6, D7, D3};
+volatile bool read = false;
+ 
 void setup() {
-  pinMode(2, INPUT);
-  pinMode(3, INPUT);
-  pinMode(4, INPUT);
-  pinMode(5, INPUT);
-  pinMode(6, INPUT);
-  pinMode(7, INPUT_PULLUP);
+ 
   Serial.begin(9600);
-
-  cli();
-  PCICR |= 0b00000100;
-  PCMSK2 |= 0b10000000;
-  sei();
+  pinMode(D4, INPUT_PULLUP);
+  pinMode(D5, INPUT_PULLUP);
+  pinMode(D6, INPUT_PULLUP);
+  pinMode(D7, INPUT_PULLUP);
+  pinMode(D3, INPUT_PULLUP);
+  pinMode(D8, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(D8), handleInterrupt, RISING);
 }
-
+ 
+ICACHE_RAM_ATTR void handleInterrupt() {
+  read = true;
+}
+ 
 void loop() {
-}
-
-ISR(PCINT2_vect) {
-  if(digitalRead(7) == HIGH){
+  if(read){
+    read = false;
     byte value = 0;
   
     for(byte i = 0; i < 5; i++) {
-      byte tmp = digitalRead(i + 2);
-      if(tmp == HIGH) {
+      byte tmp = digitalRead(dataPins[i]);
+      if(tmp == LOW) {
         value |= (0x01 << i);
       }
     }
