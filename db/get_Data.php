@@ -43,7 +43,6 @@
             }
         }
     }
-
     if (isset($_GET["locations"])) {
         //$building = $_GET["building"];
         //Connection DB
@@ -76,7 +75,6 @@
             }
         }
     }
-
     if (isset($_GET["location_id"])) {
         $location_id = $_GET["location_id"];
         //Connection DB
@@ -104,7 +102,6 @@
             }
         }
     }
-
     if (isset($_GET["room_id"])) {
         $room_id = $_GET["room_id"];
         //Connection DB
@@ -131,14 +128,4 @@
             }
         }
     }
-
-    /*
-    if ($response != null) {
-                            $json = json_encode($response);
-                            if ($json === false) {
-                                http_response_code(500);
-                            }else echo $json;
-    }
-    */
-
 ?>
