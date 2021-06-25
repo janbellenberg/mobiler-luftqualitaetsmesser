@@ -1,5 +1,16 @@
 #include "DHT.h"
 #include <SoftwareSerial.h>
+#include <ESP8266WiFi.h>
+#include <ESP8266HTTPClient.h>
+#include <WiFiClient.h>
+// Please download through Arduino-Boardmanager:
+// DHT sensor library
+// Wifi by the Community --> https://www.arduino.cc/en/Reference/WiFi101v
+// Adafruit IO Arduino
+// Adafruit_ESP8266
+
+WifiClient wifiClient;
+
 
 #define DHTPIN 12
 #define DHTTYPE DHT11
@@ -8,7 +19,7 @@
 #define LEDred 8
 
 const char* ssid = "HNBK-Schueler";
-const char* pass = "wlanhnbk22112012";
+const char* password = "wlanhnbk22112012";
 
 SoftwareSerial co2Serial(2, 3); // define MH-Z19 RX TX
 DHT dht11HNBK(DHTPIN, DHTTYPE);
@@ -75,8 +86,8 @@ void loop() {
     digitalWrite(LEDyellow, HIGH);
     digitalWrite(LEDred, LOW);
   }
-  else if (((ppm > 1500 && ppm < 2000) && (hudty < 40 || hudty > 60) && temp < 26)) 
-  || ((ppm > 1500 && ppm < 2000) && (40 > hudty && hudty < 60 ) && temp > 25)
+  else if (((ppm > 1500 && ppm < 2000) && (hudty < 40 || hudty > 60) && temp < 26) 
+  || ((ppm > 1500 && ppm < 2000) && (40 > hudty && hudty < 60 ) && temp > 25))
   {
     digitalWrite(LEDgreen, LOW);
     digitalWrite(LEDyellow, HIGH);
@@ -91,14 +102,15 @@ void loop() {
 
   if (WiFi.status() == WL_CONNECTED) 
   {
-    HTTPClient http;  //Object of class HTTPClient
-    String measurementdata = PosNr + "," + ppm + "," + temp + "," + hudty;
-    String url = "http://localhost/index.html"+measurementdata+;
+    WiFiClient http;  //Object of class HTTPClient
+    //String measurementdata = "PosNr=2" + "," + ppm + "," + temp + "," + hudty;
+    String measurementdata = "PosNr=2&ppm=1000&temp=23&hudty=30";
+    String url = "http://localhost/index.html"+measurementdata;
 
-  Serial.print("url: "); Serial.println(url);
+    Serial.print("url: "); Serial.println(url);
     Serial.println("Serverabfrage....");
 
-    http.begin(url);
+    http.begin(http, url);
     
     Serial.println("nach http.begin");
     //delay(300);
