@@ -20,8 +20,6 @@
         $feuchtigkeit_Wert = $_GET["feuchtigkeit_Wert"];
         $check = true;
     }else $check = false;
-
-
     if ($check) {
         //Connection DB
         $db = new Connection();
