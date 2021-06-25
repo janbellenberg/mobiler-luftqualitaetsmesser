@@ -3,14 +3,6 @@
     $db = new Connection();
 
     $check = false;
-    /*
-    $Pos_Nr
-    $co2_Wert,
-    $temperatur_Wert,
-    $feuchtigkeit_Wert,
-
-    */
-
 
     if (isset($_GET["Pos_Nr"])) {
         $Pos_Nr = $_GET["Pos_Nr"];
@@ -52,8 +44,4 @@
             }
         }
     }
-        
-    
-
-
 ?>
