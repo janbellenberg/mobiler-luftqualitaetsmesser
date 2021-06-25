@@ -1,0 +1,33 @@
+#status-indicator {
+  display: inline-block;
+  height: 90px;
+  width: 90px;
+  font-size: 30pt;
+  border-radius: 20px;
+  padding: 15px 26px;
+  color: white;
+}
+
+#status-indicator:not([status]) {
+  font-weight: bold;
+  font-size: 40pt;
+  padding-left: 30px;
+  padding-right: 0;
+  color: black;
+  background-color: lightgray;
+}
+
+#status-indicator[status=good] {
+  background: #00C800;
+}
+
+#status-indicator[status=attention] {
+  background: #ffbb00;
+  font-size: 50pt;
+  padding: 1px 25px;
+}
+
+#status-indicator[status=bad] {
+  padding-left: 27px;
+  background: red;
+}

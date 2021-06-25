@@ -1,0 +1,28 @@
+* {
+  font-family: Raleway, sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding-bottom: 2em;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+a, a:visited, a:active {
+  color: var(--accent);
+}
+
+hr {
+  display: block; 
+  height: 1px;
+  border: 0; 
+  border-top: 1px solid var(--accent);
+  margin: 1em 0;
+  padding: 0; 
+}
