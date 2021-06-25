@@ -19,8 +19,8 @@ Zur Überwachung der **Luftqualität** in den Klassenräumen soll eine autonome,
 
 | Bereich     | Plattform                       | Sprachen           |
 | ----------- | ------------------------------- | ------------------ |
-| WEB         | Apache / XAMPP (evtl. Docker)   | HTML, CSS, JS      |
-| API         | Apache / XAMPP (evtl. Docker)   | PHP                |
+| WEB         | Apache / XAMPP                  | React.js, CSS      |
+| API         | Apache / XAMPP                  | PHP                |
 | DB          | MySQL ( / MariaDB) + phpMyAdmin | SQL                |
 | µController | Arduino                         | C++                |
 | Roboter     | Robotino                        | GrafCet / Robotino |
