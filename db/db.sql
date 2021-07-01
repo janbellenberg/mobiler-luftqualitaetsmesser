@@ -26,6 +26,11 @@ CREATE TABLE messung(
     FOREIGN KEY (Pos_Nr) REFERENCES positionstelle(Pos_Nr) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
+insert into gebaeude values (1, "Dahnstraße"), (2, "Frankenstraße");
+insert into raum values (1, "219", 1), (2, "221", 1), (3, "HNN109", 2);
+insert into positionstelle values (1, "Tafel", 1), (2, "Tür", 2), (3, "Tafel2", 3);
+insert into messung values (1, 500, 20, 50, CURRENT_TIMESTAMP(), 1), (2, 600, 21, 55, CURRENT_TIMESTAMP(), 1);
+
 CREATE USER 'mlqm'@'%' IDENTIFIED BY 'gXg33Ep4urGp6bF2';
 REVOKE ALL PRIVILEGES ON *.* FROM 'mlqm'@'%';
 REVOKE GRANT OPTION ON *.* FROM 'mlqm'@'%';
