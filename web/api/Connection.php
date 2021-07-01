@@ -11,10 +11,12 @@ class Connection{
 
     function __construct()
     {
-        $this->servername = "localhost";
+        // for local: $this->servername = "localhost";
+        // for docker:
+        $this->servername = "mysql";
         $this->dbname = "messstation";
-        $this->dbusername = "username";
-        $this->dbpassword = "password";
+        $this->dbusername = "mlqm";
+        $this->dbpassword = "gXg33Ep4urGp6bF2";
         $this->dsn = "mysql:host=$this->servername;dbname=$this->dbname";
         $this->setConnection();
     }

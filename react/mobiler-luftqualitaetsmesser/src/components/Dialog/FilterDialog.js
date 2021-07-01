@@ -15,7 +15,7 @@ const FilterDialog = ({onFilter, onHide}) => {
   const [positionList, setPositions] = useState([]);
 
   useEffect(() => {
-    fetch("http://" + SERVER + "/SelectData.php?locations")
+    fetch("http://" + SERVER + "/get_Data.php?locations")
       .then(res => res.json())
       .then(json => {
         setLocation(json[0].id);
@@ -28,7 +28,7 @@ const FilterDialog = ({onFilter, onHide}) => {
   }, []);
 
   useEffect(() => {
-    fetch("http://" + SERVER + "/SelectData.php?location_id=" + location)
+    fetch("http://" + SERVER + "/get_Data.php?location_id=" + location)
       .then(res => res.json())
       .then(json => {
         setRooms(json);
@@ -39,7 +39,7 @@ const FilterDialog = ({onFilter, onHide}) => {
   }, [location]);
 
   useEffect(() => {
-    fetch("http://" + SERVER + "/SelectData.php?room_id=" + room)
+    fetch("http://" + SERVER + "/get_Data.php?room_id=" + room)
       .then(res => res.json())
       .then(json => {
         setPositions(json);

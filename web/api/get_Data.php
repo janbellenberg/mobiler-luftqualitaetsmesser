@@ -16,7 +16,7 @@
         if ($con != null) {
             try {
                 $sql = "SELECT co2_Wert, temperatur_Wert, feuchtigkeit_Wert,
-                        Pos_Nr, DATE_FORMAT(cTimestamp, '%H:%i') AS 'time' FROM Messung 
+                        Pos_Nr, DATE_FORMAT(cTimestamp, '%H:%i') AS 'time' FROM messung 
                         WHERE
                         DATE_FORMAT(cTimestamp,'%Y-%m-%d') = '$data' 
                         AND

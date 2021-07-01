@@ -1,1 +1,1 @@
-export const SERVER = "10.20.83.186";
+export const SERVER = "localhost";

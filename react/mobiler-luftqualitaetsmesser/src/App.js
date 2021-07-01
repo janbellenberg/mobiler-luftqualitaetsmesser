@@ -25,7 +25,7 @@ const App = () => {
   const [showInfoDialog, setShowInfoDialog] = useState(false);
 
   const updateData = async (date, position) => {
-    let tmp = await fetch("http://" + SERVER + "/SelectData.php?date=" + date + "&position=" + position);
+    let tmp = await fetch("http://" + SERVER + "/get_Data.php?date=" + date + "&position=" + position);
     tmp = await tmp.json();
     let t = [];
     let h = [];

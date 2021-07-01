@@ -1,0 +1,58 @@
+version: "3.8"
+services:
+  mysql:
+    image: mariadb:10.5.9
+    environment:
+      - TZ=Europe/Berlin
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - "127.0.0.1:3306:3306"
+    healthcheck:
+      test: "mysql --user=mlqm --password=gXg33Ep4urGp6bF2 --execute 'USE messstation; SELECT 1 FROM dual;'"
+      interval: 1m
+      timeout: 10s
+    
+    volumes:
+      - ~/mlqm/db:/var/lib/mysql
+      - ~/mlqm/db-init:/docker-entrypoint-initdb.d
+    restart: on-failure
+    networks:
+      mlqmNetwork:
+        ipv4_address: 192.168.2.5
+  web:
+    image: mlqm-web:latest
+    depends_on:
+      - api
+    networks:
+      mlqmNetwork:
+        ipv4_address: 192.168.2.3
+  api:
+    image: mlqm-api:latest
+    depends_on:
+      - mysql
+    networks:
+      mlqmNetwork:
+        ipv4_address: 192.168.1.4
+  proxy:
+    image: nginx:1.19.6-alpine
+    depends_on:
+      - web
+      - api
+    ports:
+      - "0.0.0.0:80:80"
+    networks:
+      mlqmNetwork:
+        ipv4_address: 192.168.1.2
+    links:
+      - api
+    volumes:
+      - ~/mlqm/nginx:/etc/nginx/conf.d
+      - ~/mlqm/nginx/log:/var/log/nginx
+
+networks:
+  mlqmNetwork:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.2.0/28
