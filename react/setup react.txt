@@ -1,0 +1,17 @@
+Node.js downloaden:
+https://nodejs.org/en/download/
+
+React installieren:
+npm i create-react-app -g
+
+Neues Projekt anlegen
+npx create-react-app <my-app>
+
+Bibliotheken für Diagramme hinzufügen
+npm install react-chartjs-2 chart.js
+
+Projekt starten (Development-Server):
+npm start
+
+Projekt für Apache zu einer normalen Website builden:
+npm run build
